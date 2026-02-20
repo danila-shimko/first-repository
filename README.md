@@ -12,4 +12,4 @@ The container launches a welcome web page.
 docker pull danilashimko/my-first-image:latest
 
 # Запустить контейнер
-docker run -d -p 8080:80 --name my-app danilashimko/my-first-image:lateste
+docker run -d -p 8080:80 --name my-app danilashimko/my-first-image:latest
