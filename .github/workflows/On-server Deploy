@@ -1,0 +1,34 @@
+name: On-server Deploy
+
+#запускать при каждом push в любой ветке репозитория
+on: [push]
+
+jobs:
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      # получить код из репозитория
+      - name: Checkout code
+        # готовое действие для клонирования репозитория
+        uses: actions/checkout@v3
+
+      # подключиться к серверу по SSH и выполнить команды развёртывания
+      - name: Deploy via SSH (build on server)
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          # Приватный SSH-ключ для аутентификации 
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Перейти в директорию проекта на сервере
+            cd /opt/nginx-proxy-manager/first-repository
+            # Обновить код из репозитория (ветка main)
+            git pull origin main
+            # Остановить текущие контейнеры 
+            docker-compose down
+            # Запустить контейнеры заново, пересобрав образы, где это необходимо
+            docker-compose up -d --build
+            # Очистить неиспользуемые ресурсы Docker
+            docker system prune -f
