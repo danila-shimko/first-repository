@@ -290,3 +290,6 @@
 [25/Feb/2026:00:19:37 +0300] 400 - GET http localhost-nginx-proxy-manager "-" [Client 204.76.203.73] [Length 154] [Gzip -] "-" "-"
 [25/Feb/2026:00:23:07 +0300] 200 - GET http 82.146.44.222 "/" [Client 195.3.221.8] [Length 568] [Gzip 1.86] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46" "-"
 [25/Feb/2026:00:30:50 +0300] 200 - GET http 82.146.44.222 "/" [Client 176.65.149.157] [Length 1033] [Gzip -] "Mozilla/1.0" "-"
+[25/Feb/2026:01:51:13 +0300] 304 - GET http newcss2.fvds.ru "/" [Client 5.18.237.169] [Length 0] [Gzip -] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 YaBrowser/25.12.0.0 Safari/537.36" "-"
+[25/Feb/2026:01:51:27 +0300] 404 - GET http newcss2.fvds.ru "/robots.txt" [Client 213.180.203.241] [Length 150] [Gzip -] "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)" "-"
+[25/Feb/2026:01:51:28 +0300] 200 - GET http newcss2.fvds.ru "/" [Client 213.180.203.236] [Length 568] [Gzip 1.86] "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)" "-"
