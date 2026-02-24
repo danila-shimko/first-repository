@@ -27,8 +27,8 @@ jobs:
             # Обновить код из репозитория (ветка main)
             git pull origin main
             # Остановить текущие контейнеры 
-            docker-compose down
+            docker compose down
             # Запустить контейнеры заново, пересобрав образы, где это необходимо
-            docker-compose up -d --build
+            docker compose up -d --build
             # Очистить неиспользуемые ресурсы Docker
             docker system prune -f
