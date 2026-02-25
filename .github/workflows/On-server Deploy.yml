@@ -1,15 +1,16 @@
-name: On-server Deploy
+name: CI/CD
 
 on:
-  pull_request: 
-    branches:
-      - main
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
 
 env:
   TEST_TAG: myapp:test
 
 jobs:
-  deploy:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,6 +29,14 @@ jobs:
           sleep 3
           docker compose ps | grep "Up" || exit 1
           docker compose down
+
+  deploy:
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
 
       - name: Deploy via SSH (build on server)
         uses: appleboy/ssh-action@v1.2.5
