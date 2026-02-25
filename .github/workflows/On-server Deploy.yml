@@ -24,10 +24,10 @@ jobs:
           script: |
             # Перейти в директорию проекта на сервере
             cd /opt/nginx-proxy-manager/first-repository
-            # Обновить код из репозитория (ветка main)
-            git pull origin main
             # Остановить текущие контейнеры 
             docker compose down
+            # Обновить код из репозитория (ветка main)
+            git pull origin main
             # Запустить контейнеры заново, пересобрав образы, где это необходимо
             docker compose up -d --build
             # Очистить неиспользуемые ресурсы Docker
