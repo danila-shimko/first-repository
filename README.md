@@ -5,7 +5,7 @@ Simple web server.
 
 ## О проекте
 The container launches a welcome web page.
-## new_string ok ebebebebe
+## new_string okey
 ## Как запустить локально
 
 ```bash
