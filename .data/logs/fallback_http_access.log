@@ -466,3 +466,5 @@
 [25/Feb/2026:14:29:43 +0300] 400 - GET http 82.146.44.222 "/" [Client 3.131.220.121] [Length 654] [Gzip -] "visionheight.com/scan Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/126.0.0.0 Safari/537.36" "-"
 [25/Feb/2026:14:32:19 +0300] 400 - - http localhost "-" [Client 3.131.220.121] [Length 154] [Gzip -] "-" "-"
 [25/Feb/2026:14:34:34 +0300] 400 - - http localhost "-" [Client 3.131.220.121] [Length 0] [Gzip -] "-" "-"
+[25/Feb/2026:14:37:20 +0300] 404 - GET http 82.146.44.222 "/bin/" [Client 204.76.203.18] [Length 150] [Gzip -] "-" "-"
+[25/Feb/2026:14:44:03 +0300] 200 - GET http 82.146.44.222 "/" [Client 195.3.221.8] [Length 568] [Gzip 1.86] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46" "-"
