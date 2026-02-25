@@ -16,17 +16,16 @@ jobs:
       - name: Checkout code
         # готовое действие для клонирования репозитория
         uses: actions/checkout@v6
-        
       - name: Build and export to Docker
         uses: docker/build-push-action@v6
         with:
           context: .
           load: true
-          tags: ${{ env.TEST_TAG}}
-        # Проверка на запуск без ошибок
+          tags: ${{ env.TEST_TAG }}
+
       - name: Test built image
         run: |
-          docker run --rm ${{ env.TEST_TAG}}
+          docker run --rm ${{ env.TEST_TAG }}
       # Деплой на сервер
       - name: Deploy via SSH (build on server)
         uses: appleboy/ssh-action@v1.2.5
