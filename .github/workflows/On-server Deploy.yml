@@ -1,5 +1,4 @@
 name: CI/CD
-
 on:
   pull_request:
     branches: [ main ]
@@ -29,6 +28,19 @@ jobs:
           sleep 3
           docker compose ps | grep "Up" || exit 1
           docker compose down
+
+  # Новая job: автоматическое слияние PR после успешных тестов
+  merge-pr:
+    needs: build-and-test
+    # Запускаем только для открытых и не черновых PR
+    if: github.event_name == 'pull_request' && github.event.pull_request.state == 'open' && !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ github.event.number }} --merge --auto
 
   deploy:
     needs: build-and-test
