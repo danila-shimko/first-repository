@@ -1,8 +1,13 @@
 name: On-server Deploy
-
+# 
 #запускать при каждом push в любой ветке репозитория
-on: [push]
-
+on: 
+  push:
+   branches: 
+     - main
+    
+env:
+  TEST_TAG: myapp:test
 jobs:
   deploy: 
     runs-on: ubuntu-latest
@@ -11,8 +16,18 @@ jobs:
       - name: Checkout code
         # готовое действие для клонирования репозитория
         uses: actions/checkout@v6
-
-      # подключиться к серверу по SSH и выполнить команды развёртывания
+        
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: false
+          tags: ${{ env.TEST_TAG}}
+        # Проверка на запуск без ошибок
+      - name: Test built image
+        run: |
+          docker run --rm ${{ env.TEST_TAG}}
+      # Деплой на сервер
       - name: Deploy via SSH (build on server)
         uses: appleboy/ssh-action@v1.2.5
         with:
@@ -26,9 +41,8 @@ jobs:
             cd /opt/nginx-proxy-manager/first-repository
             # Обновить код из репозитория (ветка main)
             git pull origin main
-            # Остановить текущие контейнеры 
-            docker compose down
-            # Запустить контейнеры заново, пересобрав образы, где это необходимо
-            docker compose up -d --build
+            # Запустить новые контейнеры и обновить  
+            docker compose build
+            docker compose up -d
             # Очистить неиспользуемые ресурсы Docker
             docker system prune -f
