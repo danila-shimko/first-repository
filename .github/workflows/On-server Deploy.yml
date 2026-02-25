@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          load: false
+          load: true
           tags: ${{ env.TEST_TAG}}
         # Проверка на запуск без ошибок
       - name: Test built image
