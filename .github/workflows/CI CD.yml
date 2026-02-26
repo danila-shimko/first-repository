@@ -1,10 +1,8 @@
 name: CI/CD Pipeline
 
 on:
-  # Запускаем при создании PR в main или main1
   pull_request:
     branches: [ main, main1 ]
-  # Запускаем после закрытия PR (для деплоя, если PR в main)
   pull_request_target:
     types: [ closed ]
     branches: [ main ]
@@ -16,7 +14,6 @@ jobs:
   # ========== 1. ТЕСТИРОВАНИЕ ==========
   test:
     name: Run tests
-    # Запускается только для событий pull_request (не для closed)
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +34,7 @@ jobs:
           docker compose ps | grep "Up" || exit 1
           docker compose down
 
-  # ========== 2. АВТО-МЕРЖ (только для PR в main/main1) ==========
+  # ========== 2. АВТО-МЕРЖ ==========
   auto-merge:
     name: Auto-merge PR
     needs: test
@@ -56,10 +53,10 @@ jobs:
         run: |
           gh pr merge ${{ github.event.number }} --merge --auto
 
-  # ========== 3. ДЕПЛОЙ (только после мержа PR в main) ==========
+  # ========== 3. ДЕПЛОЙ (только после мержа) ==========
   deploy:
     name: Deploy to server
-    needs: test
+    # Убрана зависимость от test – тесты уже прошли на этапе PR
     if: github.event_name == 'pull_request_target' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     steps:
