@@ -1,5 +1,4 @@
 name: Deploy after merge
-
 on:
   pull_request:
     types: [closed]
@@ -11,15 +10,6 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      # Диагностический шаг – временно, чтобы увидеть данные события
-      - name: Debug event info
-        run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Action: ${{ github.event.action }}"
-          echo "PR merged: ${{ github.event.pull_request.merged }}"
-          echo "Base ref: ${{ github.event.pull_request.base.ref }}"
-          echo "Head ref: ${{ github.event.pull_request.head.ref }}"
-
       - name: Checkout code
         uses: actions/checkout@v4
 
