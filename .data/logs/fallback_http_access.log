@@ -759,3 +759,4 @@
 [26/Feb/2026:10:49:05 +0300] 400 - - http localhost "-" [Client 130.12.181.85] [Length 154] [Gzip -] "-" "-"
 [26/Feb/2026:10:49:07 +0300] 400 - - http localhost "-" [Client 130.12.181.85] [Length 154] [Gzip -] "-" "-"
 [26/Feb/2026:10:56:14 +0300] 200 - GET http 82.146.44.222 "/" [Client 195.3.221.8] [Length 568] [Gzip 1.86] "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46" "-"
+[26/Feb/2026:11:03:55 +0300] 400 - - http localhost "-" [Client 104.140.148.62] [Length 154] [Gzip -] "-" "-"
