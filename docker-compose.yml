@@ -1,24 +1,4 @@
 services:
-  app:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-
-      - '80:80' # Public HTTP Port
-      - '443:443' # Public HTTPS Port
-      - '81:81' # Admin Web Port
-
-    environment:
-      TZ: "Europe/Moscow"
-
-    external_links:
-      - simple-nginx:simple-nginx
-    volumes:
-      - ./.data:/data
-      - ./.letsencrypt:/etc/letsencrypt
-    networks:
-      - appnetwork
-
   simple-nginx:
     container_name: simple_nginx_local
     build:
@@ -28,7 +8,6 @@ services:
       - "127.0.0.1:8080:80"
     networks:
       - appnetwork
-    restart: unless-stopped
 
 networks:
   appnetwork:
