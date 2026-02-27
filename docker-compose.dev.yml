@@ -4,9 +4,9 @@ services:
     container_name: npm_app_dev
     restart: unless-stopped
     ports:
-      - '8081:80'
-      - '4443:443'
-      - '8082:81'
+      - '8081:80'    # HTTP для dev
+      - '4443:443'   # HTTPS для dev
+      - '8082:81'    # Admin панель для dev
     environment:
       TZ: "Europe/Moscow"
     volumes:
@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8083:80"
+      - '8083:80'    # тестовый сайт на порту 8083
     networks:
       - appnetwork
     restart: unless-stopped
