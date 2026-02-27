@@ -21,7 +21,7 @@ jobs:
       - name: Run containers and test
         run: |
           docker compose up -d
-          sleep 5 # f
+          sleep 5
           if ! docker compose ps --quiet --filter "status=running" | grep -q .; then
             echo "No running containers found. Logs:"
             docker compose logs
