@@ -15,7 +15,7 @@ services:
     networks:
       - appnetwork
 
-  simple-nginx-dev:
+  simple-nginx:
     container_name: simple_nginx_dev
     build:
       context: .
