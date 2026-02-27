@@ -1,4 +1,4 @@
-name: Deploy after merge
+name: Deploy
 on:
   push:
     branches: [main]
