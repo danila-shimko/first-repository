@@ -1,6 +1,6 @@
 services:
-  simple-nginx-prod:
-    container_name: simple_nginx_prod
+  simple-nginx:
+    container_name: simple_nginx_local
     build:
       context: .
       dockerfile: Dockerfile
