@@ -25,3 +25,4 @@
 2026/02/26 11:07:54 [error] 201#201: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 188.186.140.44, server: nginxproxymanager, request: "GET /api/tokens HTTP/1.1", upstream: "http://127.0.0.1:3000/tokens", host: "newcss2.fvds.ru:81", referrer: "http://newcss2.fvds.ru:81/nginx/proxy"
 2026/02/26 11:08:02 [warn] 201#201: 512 worker_connections are not enough, reusing connections
 2026/02/27 09:46:22 [warn] 221#221: 512 worker_connections are not enough, reusing connections
+2026/02/27 12:40:49 [warn] 237#237: 512 worker_connections are not enough, reusing connections
