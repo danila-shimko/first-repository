@@ -12,13 +12,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: docker build -t ${{ env.TEST_TAG }} .
-      - run: |
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t ${{ env.TEST_TAG }} .
+
+      - name: Run containers and test
+        run: |
           docker compose up -d
-          sleep 5
+          sleep 5 # f
           if ! docker compose ps --quiet --filter "status=running" | grep -q .; then
+            echo "No running containers found. Logs:"
             docker compose logs
+            docker compose down
             exit 1
           fi
           docker compose down
@@ -31,6 +38,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Auto-merge PR
         run: gh pr merge ${{ github.event.number }} --merge --auto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
