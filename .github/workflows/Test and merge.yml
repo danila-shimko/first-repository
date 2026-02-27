@@ -1,0 +1,48 @@
+name: Test and Auto-merge
+
+on:
+  pull_request:
+    branches: [ main, main1 ]
+
+env:
+  TEST_TAG: myapp:test
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: ${{ env.TEST_TAG }}
+
+      - name: Test built image
+        run: |
+          docker compose up -d
+          sleep 3
+          docker compose ps | grep "Up" || exit 1
+          docker compose down
+
+  auto-merge:
+    name: Auto-merge PR
+    needs: test
+    if: github.event.pull_request.state == 'open' && !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Merge pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ github.event.number }} --merge --auto
