@@ -1,6 +1,6 @@
 services:
-  simple-nginx:
-    container_name: simple_nginx_local
+  simple-nginx-prod:
+    container_name: simple_nginx_prod
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,6 +8,7 @@ services:
       - "127.0.0.1:8080:80"
     networks:
       - appnetwork
+    restart: unless-stopped
 
 networks:
   appnetwork:
